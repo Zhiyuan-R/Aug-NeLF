@@ -1,6 +1,0 @@
-expdir = test
-gpuid = 0
-logdir = ./logs/
-lr = 0.0005
-decay_rate = 0.1
-decay_step = 250

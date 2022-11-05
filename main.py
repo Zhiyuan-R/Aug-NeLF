@@ -3,13 +3,15 @@ import configargparse
 import shutil
 import os
 
-from models.nelf import NeLFNet
-from models.adv_nelf import Adv_NeLFNet
+from models import NeLFNet
+from models import Adv_NeLFNet
 
 def create_arg_parser():
     parser = configargparse.ArgumentParser()
     
     # needed args
+    parser.add_argument('--config', is_config_file=True, 
+                        help='config file path')
     parser.add_argument('--expdir', type=str,
                         help='experiment name')
     
@@ -65,7 +67,8 @@ def main(args):
         model = Adv_NeLFNet().to(device)
     else:
         model = NeLFNet().to(device)
-
+    import pdb
+    pdb.set_trace()
     optimizer = torch.optim.Adam(params=model.parameters(), \
                                     lr=args.lr, \
                                     betas=(0.9, 0.999))
@@ -76,9 +79,6 @@ def main(args):
     global_step = 0
     
     # create test and exhibit set dataset
-    
-    import pdb
-    pdb.set_trace()
     
     pass
 
