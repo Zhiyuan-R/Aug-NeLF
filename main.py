@@ -85,7 +85,7 @@ def main(args):
     
     ##### Training Stage #####
     if not args.eval:
-        train_set = RayNeLFDataset(arg.da)
+        train_set = RayNeLFDataset(arg.data_path)
 
 if __name__=='__main__':
 
