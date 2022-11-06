@@ -3,9 +3,10 @@ import configargparse
 import shutil
 import os
 
-from models import NeLFNet
-from models import Adv_NeLFNet
-from data import RayNeLFDataset
+from torch.utils.tensorboard import SummaryWriter
+
+from models import NeLFNet, Adv_NeLFNet
+from data import RayNeLFDataset, RayBatchCollater, ExhibitNeRFDataset
 
 def create_arg_parser():
     parser = configargparse.ArgumentParser()
@@ -23,6 +24,8 @@ def create_arg_parser():
                         help='where to store ckpts and logs')
     parser.add_argument('--eval', action='store_true',
                         help='only evaluate without training')
+    parser.add_argument("--num_workers", type=int, default=8,
+                help='number of workers used for data loading')
     
     ## data args
     parser.add_argument("--data_path", "--datadir", type=str,
@@ -35,6 +38,12 @@ def create_arg_parser():
                         help='exponential learning rate decay scale')
     parser.add_argument('--decay_step', type=float, default=250,
                         help='exponential learning rate decay iteration (in 1000 steps)')
+    parser.add_argument("--batch_size", "--N_rand", type=int, default=32*32*4, 
+                        help='batch size (number of random rays per gradient step)')
+    parser.add_argument("--pin_mem", action='store_true', default=True,
+                    help='turn on pin memory for data loading')
+    parser.add_argument("--max_steps", "--N_iters", type=int, default=50000, 
+                        help='max iteration number (number of iteration to finish training)')
     
     # hyper-parameter for adversarial training
     parser.add_argument('--adv', action='store_true',
@@ -72,8 +81,6 @@ def main(args):
         model = Adv_NeLFNet().to(device)
     else:
         model = NeLFNet().to(device)
-    import pdb
-    pdb.set_trace()
     optimizer = torch.optim.Adam(params=model.parameters(), \
                                     lr=args.lr, \
                                     betas=(0.9, 0.999))
@@ -83,10 +90,48 @@ def main(args):
                             decay_steps=args.decay_step*1000)
     global_step = 0
     
+    # create testset and exhibitset
+    print("Loading nerf data:", args.data_path)
+    test_set = RayNeRFDataset(args.data_path, split='test')
+    try:
+        exhibit_set = ExhibitNeRFDataset(args.data_path)
+    except FileNotFoundError:
+        exhibit_set = None
+        print("Warning: No exhibit set!")
+    
     ##### Training Stage #####
     if not args.eval:
-        train_set = RayNeLFDataset(arg.data_path)
+        train_set = RayNeLFDataset(root_dir = arg.data_path,
+                                   split = 'train')
+        train_loader = torch.utils.data.DataLoader(train_set,
+                                                   batch_size=args.batch_size,
+                                                   shuffle=True,
+                                                   collate_fn=RayBatchCollater(),
+                                                   num_workers=args.num_workers,
+                                                   pin_memory=args.pin_mem)
 
+        # Summary writers
+        summary_writer = SummaryWriter(log_dir=log_dir)
+        print("Starting training ...")
+        while global_step < args.max_steps:
+            
+            if args.adv:
+            
+                pass
+            
+            else:
+                global_step = train_one_epoch(model, optimizer, scheduler,
+                                              train_loader, test_set, exhibit_set,
+                                              summary_writer,
+                                              global_step,
+                                              args.max_steps,
+                                              run_dir,
+                                              device)
+                
+    ##### Testing Stage #####
+    save_dir = os.path.join(run_dir, 'test')
+    os.makedirs(save_dir, exist_ok=True)
+                
 if __name__=='__main__':
 
     # read arguments and configs
