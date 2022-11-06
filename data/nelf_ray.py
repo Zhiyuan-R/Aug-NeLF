@@ -1,6 +1,6 @@
-from nelf_basic import BaseNeLFDataset
+from data import BaseNeLFDataset
 
-class RayNeRFDataset(BaseNeRFDataset):
+class RayNeLFDataset(BaseNeLFDataset):
 
     def __init__(self, root_dir, split='train', cam_id=False, rgb=True):
         

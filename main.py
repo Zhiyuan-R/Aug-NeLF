@@ -5,6 +5,7 @@ import os
 
 from models import NeLFNet
 from models import Adv_NeLFNet
+from data import RayNeLFDataset
 
 def create_arg_parser():
     parser = configargparse.ArgumentParser()
@@ -23,6 +24,10 @@ def create_arg_parser():
     parser.add_argument('--eval', action='store_true',
                         help='only evaluate without training')
     
+    ## data args
+    parser.add_argument("--data_path", "--datadir", type=str,
+                        help='input data directory')
+
     # training option
     parser.add_argument('--lr', type=float, default=5e-4,
                         help='learning rate')
@@ -78,14 +83,14 @@ def main(args):
                             decay_steps=args.decay_step*1000)
     global_step = 0
     
-    # create test and exhibit set dataset
-    
-    pass
+    ##### Training Stage #####
+    if not args.eval:
+        train_set = RayNeLFDataset(arg.da)
 
 if __name__=='__main__':
 
     # read arguments and configs
     parser = create_arg_parser()
-    args =  parser.parse_args()
+    args, _ =  parser.parse_known_args()
     
     main(args)
