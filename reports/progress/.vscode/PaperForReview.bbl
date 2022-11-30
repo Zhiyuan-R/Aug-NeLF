@@ -1,0 +1,67 @@
+\begin{thebibliography}{1}\itemsep=-1pt
+
+\bibitem{attal2022learning}
+Benjamin Attal, Jia-Bin Huang, Michael Zollh{\"o}fer, Johannes Kopf, and
+  Changil Kim.
+\newblock Learning neural light fields with ray-space embedding.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition}, pages 19819--19829, 2022.
+
+\bibitem{chen2022aug}
+Tianlong Chen, Peihao Wang, Zhiwen Fan, and Zhangyang Wang.
+\newblock Aug-nerf: Training stronger neural radiance fields with triple-level
+  physically-grounded augmentations.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition}, pages 15191--15202, 2022.
+
+\bibitem{dellaert2020neural}
+Frank Dellaert and Lin Yen-Chen.
+\newblock Neural volume rendering: Nerf and beyond.
+\newblock {\em arXiv preprint arXiv:2101.05204}, 2020.
+
+\bibitem{mescheder2019occupancy}
+Lars Mescheder, Michael Oechsle, Michael Niemeyer, Sebastian Nowozin, and
+  Andreas Geiger.
+\newblock Occupancy networks: Learning 3d reconstruction in function space.
+\newblock In {\em Proceedings of the IEEE/CVF conference on computer vision and
+  pattern recognition}, pages 4460--4470, 2019.
+
+\bibitem{mildenhall2021nerf}
+Ben Mildenhall, Pratul~P Srinivasan, Matthew Tancik, Jonathan~T Barron, Ravi
+  Ramamoorthi, and Ren Ng.
+\newblock Nerf: Representing scenes as neural radiance fields for view
+  synthesis.
+\newblock {\em Communications of the ACM}, 65(1):99--106, 2021.
+
+\bibitem{park2019deepsdf}
+Jeong~Joon Park, Peter Florence, Julian Straub, Richard Newcombe, and Steven
+  Lovegrove.
+\newblock Deepsdf: Learning continuous signed distance functions for shape
+  representation.
+\newblock In {\em Proceedings of the IEEE/CVF conference on computer vision and
+  pattern recognition}, pages 165--174, 2019.
+
+\bibitem{sitzmann2021light}
+Vincent Sitzmann, Semon Rezchikov, Bill Freeman, Josh Tenenbaum, and Fredo
+  Durand.
+\newblock Light field networks: Neural scene representations with
+  single-evaluation rendering.
+\newblock {\em Advances in Neural Information Processing Systems},
+  34:19313--19325, 2021.
+
+\bibitem{takikawa2021neural}
+Towaki Takikawa, Joey Litalien, Kangxue Yin, Karsten Kreis, Charles Loop, Derek
+  Nowrouzezahrai, Alec Jacobson, Morgan McGuire, and Sanja Fidler.
+\newblock Neural geometric level of detail: Real-time rendering with implicit
+  3d shapes.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition}, pages 11358--11367, 2021.
+
+\bibitem{wang2022r2l}
+Huan Wang, Jian Ren, Zeng Huang, Kyle Olszewski, Menglei Chai, Yun Fu, and
+  Sergey Tulyakov.
+\newblock R2l: Distilling neural radiance field to neural light field for
+  efficient novel view synthesis.
+\newblock {\em arXiv preprint arXiv:2203.17261}, 2022.
+
+\end{thebibliography}
